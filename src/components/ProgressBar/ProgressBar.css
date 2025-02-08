@@ -1,0 +1,28 @@
+.progress-bar-container {
+  width: 32vw;
+  margin-top: 1.2rem;
+}
+
+.progress-bar-border {
+  width: 100%;
+  border-radius: 30px;
+  border: 2px solid #1976d2;
+  margin-top: 0.5rem;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, #3e92e6 0%, #166ec7 100%);
+  height: 20px;
+  border-radius: 30px;
+  transition: width 0.3s ease-in-out;
+}
+
+.label {
+  color: white;
+}
+
+@media screen and (max-width: 1200px) {
+  .progress-bar-container {
+    width: 80vw;
+  }
+}

@@ -22,7 +22,7 @@ function Tasks(props) {
     props.onEditTask(task);
   }
 
-  const handleEditMode = (task) =>{
+  const handleEditMode = (task)=>{
     setEditMode(true);
     setEditedTaskName(task.name)
     setEditingTaskId(task.id)
@@ -30,7 +30,8 @@ function Tasks(props) {
   
   return (
     <div className="t-container">
-      <div className="check-container">
+      {props.tasks.length > 0 && 
+        <div className="check-container">
         <FormControlLabel
           control={
             <Checkbox
@@ -43,8 +44,9 @@ function Tasks(props) {
           label="Mostrar apenas ativas"
           className="filter-checkbox"
         />
-      </div>
-
+        </div>
+      }
+      {filteredTasks.length === 0 && <span className="empty-list">Nenhuma tarefa adicionada.</span>}
       {filteredTasks.map((task) => (
         <div className={`task ${(task.done ? 'done' : 'not-done')}`} key={task.id}>
           <FontAwesomeIcon className="f-icon" icon={faBarsProgress} />
@@ -61,7 +63,7 @@ function Tasks(props) {
           ) : (
             <span className="task-name">{task.name}</span>
           )}
-          {!editMode || (task.id !== editingTaskId) ?
+          {(!editMode || task.id !== editingTaskId) &&
             <div className="buttons">
             <Tooltip className="custom-tooltip" classes={{ popper: "custom-tooltip finish" }} title={task.done ? "Retomar" : "Finalizar"}>
               <IconButton onClick={()=> props.onToggleTask(task)} className="i-button check-btn">
@@ -80,8 +82,7 @@ function Tasks(props) {
                 <FontAwesomeIcon icon={faTrash} />
               </IconButton>
             </Tooltip>
-          </div> : null}
-
+          </div>}
         </div>
       ))}
     </div>

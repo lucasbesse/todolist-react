@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap");
 
 body {
-  overflow: hidden;
-  background: linear-gradient(45deg, rgb(57, 52, 52), rgb(119, 115, 115));
+  overflow-x: hidden;
+  background: rgb(91, 90, 90);
   font-weight: 500;
 }
 
@@ -16,12 +16,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 15px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .main-container h1 {
   font-size: 1.4rem;
   color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .title-container {
@@ -29,13 +31,41 @@ body {
   align-items: center;
   width: 30vw;
   justify-content: center;
-  margin-bottom: 0.8rem;
+  margin-bottom: 3.5rem;
 }
 
 .title-container .f-icon {
   font-size: 1.4rem;
   color: white;
   margin-right: 12px;
+}
+
+.todo-img {
+  width: 3.2rem;
+  margin-right: 0.8rem;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* Para navegadores baseados em Webkit (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 8px; /* Deixa o scroll mais fino */
+}
+
+/* Fundo da barra de rolagem */
+::-webkit-scrollbar-track {
+  background: #494949;
+  border-radius: 10px;
+}
+
+/* Cor e formato da "bolinha" do scroll */
+::-webkit-scrollbar-thumb {
+  background: #373737;
+  border-radius: 10px;
+}
+
+/* Ao passar o mouse sobre a barra */
+::-webkit-scrollbar-thumb:hover {
+  background: #777; /* Um tom mais claro ao passar o mouse */
 }
 
 @media screen and (max-width: 1200px) {

@@ -1,10 +1,10 @@
-import { faListCheck } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import "./App.css";
+import todoListImg from "./assets/todo-list.png";
 import Form from "./components/Form/Form";
+import ProgressBar from "./components/ProgressBar/ProgressBar";
+import { addTask, deleteTask, getTasks, updateTask } from './components/Task/services/TaskService';
 import Tasks from "./components/Task/Tasks";
-import { addTask, deleteTask, getTasks, updateTask } from './components/Task/TaskService';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -52,11 +52,12 @@ function App() {
   return (
     <div className="main-container">
       <div className="title-container">
-        <FontAwesomeIcon className="f-icon" icon={faListCheck} />
+        <img className="todo-img" src={todoListImg} alt="" />
         <h1 className="title">Lista de tarefas show de bola</h1>
       </div>     
       <Form onAddTask={handleAddTask} />
       <Tasks tasks={tasks} onDeleteTask={handleDeleteTask} onToggleTask={handleToggleTask} onEditTask={handleEditTask} />
+      {tasks.length > 0 && <ProgressBar tasks={tasks}></ProgressBar>}
     </div>
   );
 }
