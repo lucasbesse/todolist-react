@@ -5,31 +5,36 @@
   flex-direction: column;
   align-items: center;
 }
+
 .task {
   width: 100%;
   display: flex;
-  padding: 8px 15px;
+  padding: 12px 18px;
   align-items: center;
   justify-content: space-between;
   border-radius: 10px;
   background: rgb(173, 172, 172);
-  margin-top: 10px;
+  margin-top: 14px;
   box-shadow: 6px 4px 6px 2px rgba(0, 0, 0, 0.45);
   transition: all ease 0.25s;
 }
+
 .task:hover {
   transform: scale(0.99);
   box-shadow: 6px 4px 6px 2px rgba(0, 0, 0, 0.1);
 }
+
 .task-name {
   width: 80%;
   font-size: 1.1rem;
 }
+
 .buttons {
   display: flex;
   justify-content: flex-end;
   flex: 1;
 }
+
 .i-button {
   padding: 6px !important;
   background: rgb(128, 128, 128) !important;
@@ -37,14 +42,23 @@
   margin-left: 10px !important;
   font-size: 1.2rem !important;
 }
+
 .i-button:hover {
   background: rgb(112, 112, 112) !important;
 }
 
 .custom-tooltip .MuiTooltip-tooltip {
-  background-color: rgb(116, 116, 183) !important;
+  background-color: #1976d2 !important;
   color: white !important;
   font-size: 12px !important;
   padding: 8px 12px;
   border-radius: 5px;
+}
+
+.delete .MuiTooltip-tooltip {
+  background: red !important;
+}
+
+.f-icon {
+  margin-right: 12px;
 }

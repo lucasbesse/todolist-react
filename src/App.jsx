@@ -1,3 +1,5 @@
+import { faListCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import "./App.css";
 import Form from "./components/Form/Form";
@@ -44,7 +46,10 @@ function App() {
 
   return (
     <div className="main-container">
-      <h1 className="title">Lista de tarefas show de bola</h1>
+      <div className="title-container">
+        <FontAwesomeIcon className="f-icon" icon={faListCheck} />
+        <h1 className="title">Lista de tarefas show de bola</h1>
+      </div>     
       <Form onAddTask={handleAddTask} />
       <Tasks tasks={tasks} onDeleteTask={handleDeleteTask} />
     </div>
