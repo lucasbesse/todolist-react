@@ -47,44 +47,46 @@ function Tasks(props) {
         </div>
       }
       {filteredTasks.length === 0 && <span className="empty-list">Nenhuma tarefa adicionada.</span>}
-      {filteredTasks.map((task) => (
-        <div className={`task ${(task.done ? 'done' : 'not-done')}`} key={task.id}>
-          <FontAwesomeIcon className="f-icon" icon={faBarsProgress} />
-          {editMode && (editingTaskId === task.id) ? (
-            <input
-              type="text"
-              className="input-task"
-              value={editedTaskName}
-              onChange={(e) => setEditedTaskName(e.target.value)}
-              onBlur={() => handleSaveEdit(task)}
-              onKeyDown={(e) => e.key === "Enter" && handleSaveEdit(task)}
-              autoFocus
-            />
-          ) : (
-            <span className="task-name">{task.name}</span>
-          )}
-          {(!editMode || task.id !== editingTaskId) &&
-            <div className="buttons">
-            <Tooltip className="custom-tooltip" classes={{ popper: "custom-tooltip finish" }} title={task.done ? "Retomar" : "Finalizar"}>
-              <IconButton onClick={()=> props.onToggleTask(task)} className="i-button check-btn">
-              <FontAwesomeIcon icon={task.done ? faRotateLeft : faCheck} />
-              </IconButton>
-            </Tooltip>
+      <div className="scroll-container">
+        {filteredTasks.map((task) => (
+          <div className={`task ${(task.done ? 'done' : 'not-done')}`} key={task.id}>
+            <FontAwesomeIcon className="f-icon" icon={faBarsProgress} />
+            {editMode && (editingTaskId === task.id) ? (
+              <input
+                type="text"
+                className="input-task"
+                value={editedTaskName}
+                onChange={(e) => setEditedTaskName(e.target.value)}
+                onBlur={() => handleSaveEdit(task)}
+                onKeyDown={(e) => e.key === "Enter" && handleSaveEdit(task)}
+                autoFocus
+              />
+            ) : (
+              <span className="task-name">{task.name}</span>
+            )}
+            {(!editMode || task.id !== editingTaskId) &&
+              <div className="buttons">
+              <Tooltip className="custom-tooltip" classes={{ popper: "custom-tooltip finish" }} title={task.done ? "Retomar" : "Finalizar"}>
+                <IconButton onClick={()=> props.onToggleTask(task)} className="i-button check-btn">
+                <FontAwesomeIcon icon={task.done ? faRotateLeft : faCheck} />
+                </IconButton>
+              </Tooltip>
 
-            <Tooltip classes={{ popper: "custom-tooltip" }} title="Editar">
-              <IconButton onClick={() => handleEditMode(task)} className="i-button">
-                <FontAwesomeIcon icon={faPencil} />
-              </IconButton>
-            </Tooltip>
+              <Tooltip classes={{ popper: "custom-tooltip" }} title="Editar">
+                <IconButton onClick={() => handleEditMode(task)} className="i-button">
+                  <FontAwesomeIcon icon={faPencil} />
+                </IconButton>
+              </Tooltip>
 
-            <Tooltip classes={{ popper: "custom-tooltip delete" }} title="Excluir">
-              <IconButton onClick={() => props.onDeleteTask(task.id)} className="i-button">
-                <FontAwesomeIcon icon={faTrash} />
-              </IconButton>
-            </Tooltip>
-          </div>}
-        </div>
-      ))}
+              <Tooltip classes={{ popper: "custom-tooltip delete" }} title="Excluir">
+                <IconButton onClick={() => props.onDeleteTask(task.id)} className="i-button">
+                  <FontAwesomeIcon icon={faTrash} />
+                </IconButton>
+              </Tooltip>
+            </div>}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
