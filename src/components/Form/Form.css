@@ -51,10 +51,10 @@
   }
   .add-btn {
     width: 100% !important;
+    padding: 0 8px !important;
   }
   .input-task {
     margin-right: 0;
-    padding: 0;
     margin-bottom: 12px;
   }
 }

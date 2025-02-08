@@ -89,6 +89,11 @@
   font-size: 1.6rem;
 }
 
+.check-btn {
+  border-radius: 50% !important;
+  padding: 8px !important;
+}
+
 @media screen and (max-width: 1200px) {
   .t-container {
     width: 80vw;

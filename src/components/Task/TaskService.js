@@ -37,11 +37,11 @@ export const deleteTask = async (taskId) => {
     return true;
   } catch (error) {
     console.error(error);
-    return false;
+    return null;
   }
 };
 
-export const completeTask = async (task) => {
+export const updateTask = async (task) => {
   try {
     const response = await fetch(`${API_URL}${task.id}/`, {
       method: "PUT",
@@ -53,6 +53,6 @@ export const completeTask = async (task) => {
     return true;
   } catch (error) {
     console.error(error);
-    return false;
+    return null;
   }
 };

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Form from "./components/Form/Form";
 import Tasks from "./components/Task/Tasks";
-import { addTask, completeTask, deleteTask, getTasks } from './components/Task/TaskService';
+import { addTask, deleteTask, getTasks, updateTask } from './components/Task/TaskService';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -36,7 +36,14 @@ function App() {
 
   async function handleToggleTask(task){
     task.done = !task.done
-    const result = await completeTask(task)
+    const result = await updateTask(task)
+    if(result){
+      fetchTasks();
+    }
+  };
+
+  async function handleEditTask(task){
+    const result = await updateTask(task)
     if(result){
       fetchTasks();
     }
@@ -49,7 +56,7 @@ function App() {
         <h1 className="title">Lista de tarefas show de bola</h1>
       </div>     
       <Form onAddTask={handleAddTask} />
-      <Tasks tasks={tasks} onDeleteTask={handleDeleteTask} onToggleTask={handleToggleTask} />
+      <Tasks tasks={tasks} onDeleteTask={handleDeleteTask} onToggleTask={handleToggleTask} onEditTask={handleEditTask} />
     </div>
   );
 }
