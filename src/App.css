@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap");
 
 body {
   overflow-x: hidden;
@@ -7,7 +7,7 @@ body {
 }
 
 * {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .main-container {
@@ -46,26 +46,22 @@ body {
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
 }
 
-/* Para navegadores baseados em Webkit (Chrome, Edge, Safari) */
 ::-webkit-scrollbar {
-  width: 8px; /* Deixa o scroll mais fino */
+  width: 8px;
 }
 
-/* Fundo da barra de rolagem */
 ::-webkit-scrollbar-track {
   background: #494949;
   border-radius: 10px;
 }
 
-/* Cor e formato da "bolinha" do scroll */
 ::-webkit-scrollbar-thumb {
   background: #373737;
   border-radius: 10px;
 }
 
-/* Ao passar o mouse sobre a barra */
 ::-webkit-scrollbar-thumb:hover {
-  background: #777; /* Um tom mais claro ao passar o mouse */
+  background: #777;
 }
 
 @media screen and (max-width: 1200px) {

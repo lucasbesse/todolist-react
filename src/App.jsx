@@ -3,7 +3,7 @@ import "./App.css";
 import todoListImg from "./assets/todo-list.png";
 import Form from "./components/Form/Form";
 import ProgressBar from "./components/ProgressBar/ProgressBar";
-import { addTask, deleteTask, getTasks, updateTask } from './components/Task/services/TaskService';
+import { addTask, deleteTask, getTasks, updateTask } from "./components/Task/services/TaskService";
 import Tasks from "./components/Task/Tasks";
 
 function App() {
@@ -14,50 +14,77 @@ function App() {
   }, []);
 
   async function fetchTasks(){
-    const data = await getTasks();
-    setTasks(data)
+    try {
+      const data = await getTasks();
+      setTasks(data);
+    } catch (error) {
+      console.error("Erro ao buscar tarefas:", error);
+    }
   };
 
   async function handleAddTask(task){
-    const newTask = { name: task.name, done: task.done  };
-
-    const data = await addTask(newTask)
-    if(data){
-      fetchTasks();
+    try {
+      const newTask = { name: task.name, done: task.done };
+      const data = await addTask(newTask);
+      if (data) {
+        setTasks(prevTasks => [data, ...prevTasks ]);
+      }
+    } catch (error) {
+      console.error("Erro ao adicionar tarefa:", error);
     }
   };
 
   async function handleDeleteTask(taskId){
-    const result = await deleteTask(taskId)
-    if(result){
-      fetchTasks();
+    try {
+      const result = await deleteTask(taskId);
+      if (result) {
+        setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId));
+      }
+    } catch (error) {
+      console.error("Erro ao deletar tarefa:", error);
     }
   };
 
   async function handleToggleTask(task){
-    task.done = !task.done
-    const result = await updateTask(task)
-    if(result){
-      fetchTasks();
+    try {
+      const updatedTask = { ...task, done: !task.done };
+      const result = await updateTask(updatedTask);
+      if (result) {
+        setTasks(prevTasks => prevTasks.map(t => (t.id === task.id ? updatedTask : t)));
+      }
+    } catch (error) {
+      console.error("Erro ao concluir tarefa:", error);
     }
   };
 
   async function handleEditTask(task){
-    const result = await updateTask(task)
-    if(result){
-      fetchTasks();
+    try {
+      const result = await updateTask(task);
+      if (result) {
+        setTasks(prevTasks => prevTasks.map(t => (t.id === task.id ? task : t)));
+      }
+    } catch (error) {
+      console.error("Erro ao editar tarefa:", error);
     }
   };
 
   return (
     <div className="main-container">
       <div className="title-container">
-        <img className="todo-img" src={todoListImg} alt="" />
+        <img className="todo-img" src={todoListImg} alt="Lista de tarefas" />
         <h1 className="title">Lista de tarefas show de bola</h1>
       </div>     
+
       <Form onAddTask={handleAddTask} />
-      <Tasks tasks={tasks} onDeleteTask={handleDeleteTask} onToggleTask={handleToggleTask} onEditTask={handleEditTask} />
-      {tasks.length > 0 && <ProgressBar tasks={tasks}></ProgressBar>}
+
+      <Tasks 
+        tasks={tasks} 
+        onDeleteTask={handleDeleteTask} 
+        onToggleTask={handleToggleTask} 
+        onEditTask={handleEditTask} 
+      />
+
+      {tasks.length > 0 && <ProgressBar tasks={tasks} />}
     </div>
   );
 }

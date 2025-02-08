@@ -58,7 +58,7 @@ function Tasks(props) {
                 value={editedTaskName}
                 onChange={(e) => setEditedTaskName(e.target.value)}
                 onBlur={() => handleSaveEdit(task)}
-                onKeyDown={(e) => e.key === "Enter" && handleSaveEdit(task)}
+                onKeyUp={(e) => e.key === "Enter" && handleSaveEdit(task)}
                 autoFocus
               />
             ) : (

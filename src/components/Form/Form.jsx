@@ -27,6 +27,7 @@ function Form(props) {
           type="text"
           className="input-task"
           value={task}
+          onKeyUp={(e) => e.key === "Enter" && handleSubmit()}
           onChange={handleChange}
         />
         <Button variant="contained" color="primary" onClick={handleSubmit} className="add-btn">
