@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Form from "./components/Form/Form";
 import Tasks from "./components/Task/Tasks";
-import { addTask, deleteTask, getTasks } from './components/Task/TaskService';
+import { addTask, completeTask, deleteTask, getTasks } from './components/Task/TaskService';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -13,18 +13,10 @@ function App() {
     fetchTasks();
   }, []);
 
-  const fetchTasks = async () => {
+  async function fetchTasks(){
     const data = await getTasks();
-    //setTasks(data)
-    setTasks([
-      { id: 1, name: "Estudar React" },
-      { id: 2, name: "Criar um projeto em Material UI" },
-      { id: 3, name: "Refatorar código do To-Do List" },
-      { id: 4, name: "Testar funcionalidades do Tooltip" },
-      { id: 5, name: "Melhorar a performance da aplicação" }
-    ])
+    setTasks(data)
   };
-
 
   async function handleAddTask(task){
     const newTask = { name: task.name, done: task.done  };
@@ -35,10 +27,16 @@ function App() {
     }
   };
 
-  // Excluir uma tarefa
-  const handleDeleteTask = async (taskId) => {
-
+  async function handleDeleteTask(taskId){
     const result = await deleteTask(taskId)
+    if(result){
+      fetchTasks();
+    }
+  };
+
+  async function handleToggleTask(task){
+    task.done = !task.done
+    const result = await completeTask(task)
     if(result){
       fetchTasks();
     }
@@ -51,7 +49,7 @@ function App() {
         <h1 className="title">Lista de tarefas show de bola</h1>
       </div>     
       <Form onAddTask={handleAddTask} />
-      <Tasks tasks={tasks} onDeleteTask={handleDeleteTask} />
+      <Tasks tasks={tasks} onDeleteTask={handleDeleteTask} onToggleTask={handleToggleTask} />
     </div>
   );
 }

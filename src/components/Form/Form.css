@@ -38,3 +38,23 @@
 .form-title {
   font-size: 1.2rem;
 }
+
+@media screen and (max-width: 1200px) {
+  .f-container {
+    width: 80vw;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .action {
+    flex-direction: column;
+  }
+  .add-btn {
+    width: 100% !important;
+  }
+  .input-task {
+    margin-right: 0;
+    padding: 0;
+    margin-bottom: 12px;
+  }
+}

@@ -40,3 +40,19 @@ export const deleteTask = async (taskId) => {
     return false;
   }
 };
+
+export const completeTask = async (task) => {
+  try {
+    const response = await fetch(`${API_URL}${task.id}/`, {
+      method: "PUT",
+      body: JSON.stringify(task),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) throw new Error("Erro ao excluir tarefa");
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
