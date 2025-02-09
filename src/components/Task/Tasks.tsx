@@ -57,7 +57,7 @@ function Tasks(props: TasksProps) {
       {filteredTasks.length === 0 && <span className="empty-list">Nenhuma tarefa adicionada.</span>}
       <div className="scroll-container">
         {filteredTasks.map((task) => (
-          <div className={`task ${(task.done ? 'done' : 'not-done')}`} key={task.id}>
+          <div className={`task ${(task.done ? 'done' : 'not-done')} task-enter`} key={task.id}>
             <FontAwesomeIcon className="f-icon" icon={faBarsProgress} />
             {editMode && (editingTaskId === task.id) ? (
               <input
