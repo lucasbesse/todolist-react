@@ -1,17 +1,17 @@
-import React from "react";
 import "./ProgressBar.css";
 
 const ProgressBar = (props) => {
 
-  const getProgress = () => {
+  const getProgress = (): number => {
     const completedTasks = props.tasks.filter(task => task.done).length;
-    return ((completedTasks / props.tasks.length) * 100).toFixed(0);
+    let result = ((completedTasks / props.tasks.length) * 100).toFixed(0);
+    return parseInt(result);
   };
 
   return (
     <div className="progress-bar-container">
       <span className="label">Progresso das tarefas ({getProgress()}%)</span>
-      <div className="progress-bar-border">
+      <div className={`progress-bar-border ${getProgress() === 0 && 'no-value'}`}>
         <div className={`progress-bar ${getProgress() < 100 && 'flat-border'}`} style={{ width: `${getProgress()}%` }}></div>
       </div>
     </div>

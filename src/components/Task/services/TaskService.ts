@@ -1,6 +1,7 @@
+import { Task } from "../Task.interface";
 const API_URL = `${process.env.REACT_APP_API_URL}/tasks/`;
 
-export const getTasks = async () => {
+export const getTasks = async (): Promise<Task[]> => {
   try {
     const response = await fetch(API_URL);
     if (!response.ok) throw new Error("Erro ao buscar tarefas");
@@ -11,7 +12,7 @@ export const getTasks = async () => {
   }
 };
 
-export const addTask = async (task) => {
+export const addTask = async (task: Task): Promise<any> => {
   try {
     const response = await fetch(API_URL, {
       method: "POST",
@@ -27,7 +28,7 @@ export const addTask = async (task) => {
   }
 };
 
-export const deleteTask = async (taskId) => {
+export const deleteTask = async (taskId: number): Promise<any> => {
   try {
     const response = await fetch(`${API_URL}${taskId}/`, {
       method: "DELETE",
@@ -41,7 +42,7 @@ export const deleteTask = async (taskId) => {
   }
 };
 
-export const updateTask = async (task) => {
+export const updateTask = async (task: Task): Promise<any> => {
   try {
     const response = await fetch(`${API_URL}${task.id}/`, {
       method: "PUT",

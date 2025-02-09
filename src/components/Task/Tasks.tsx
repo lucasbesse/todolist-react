@@ -2,17 +2,25 @@ import { faBarsProgress, faCheck, faPencil, faRotateLeft, faTrash } from "@forta
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Checkbox, FormControlLabel, IconButton, Tooltip } from "@mui/material";
 import { useState } from "react";
+import { Task } from "./Task.interface";
 
 import "./Tasks.css";
 
-function Tasks(props) {
+interface TasksProps {
+  tasks: Task[];
+  onToggleTask: (task: Task) => void;
+  onEditTask: (task: Task) => void;
+  onDeleteTask: (taskId: number) => void;
+}
+
+function Tasks(props: TasksProps) {
   const [showCompleted, setShowCompleted] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [editedTaskName, setEditedTaskName] = useState("");
-  const filteredTasks = showCompleted ? props.tasks.filter((task) => !task.done) : props.tasks;
+  const filteredTasks: Task[] = showCompleted ? props.tasks.filter((task) => !task.done) : props.tasks;
 
-  const handleSaveEdit = (task)=>{
+  const handleSaveEdit = (task: Task): void => {
     setEditMode(false);
     if(!editedTaskName){
       return
@@ -22,7 +30,7 @@ function Tasks(props) {
     props.onEditTask(task);
   }
 
-  const handleEditMode = (task)=>{
+  const handleEditMode = (task: Task): void => {
     setEditMode(true);
     setEditedTaskName(task.name)
     setEditingTaskId(task.id)

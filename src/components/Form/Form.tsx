@@ -1,15 +1,20 @@
 import { Button } from "@mui/material";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { Task } from "../Task/Task.interface";
 import "./Form.css";
 
-function Form(props) {
+interface FormProps {
+  onAddTask: (task: Task) => void;
+}
+
+function Form(props: FormProps) {
   const [task, setTask] = useState("");
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTask(event.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (): void => {
     if (!task) return;
     let formattedTask = {
       name: task,

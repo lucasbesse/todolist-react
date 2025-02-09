@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import todoListImg from "./assets/todo-list.png";
 import Form from "./components/Form/Form";
 import ProgressBar from "./components/ProgressBar/ProgressBar";
 import { addTask, deleteTask, getTasks, updateTask } from "./components/Task/services/TaskService";
+import { Task } from "./components/Task/Task.interface";
 import Tasks from "./components/Task/Tasks";
+import TopBar from "./components/TopBar/TopBar";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -13,7 +14,7 @@ function App() {
     fetchTasks();
   }, []);
 
-  async function fetchTasks(){
+  async function fetchTasks(): Promise<void>{
     try {
       const data = await getTasks();
       setTasks(data);
@@ -22,7 +23,7 @@ function App() {
     }
   };
 
-  async function handleAddTask(task){
+  async function handleAddTask(task: Task): Promise<void>{
     try {
       const newTask = { name: task.name, done: task.done };
       const data = await addTask(newTask);
@@ -34,7 +35,7 @@ function App() {
     }
   };
 
-  async function handleDeleteTask(taskId){
+  async function handleDeleteTask(taskId: number): Promise<void>{
     try {
       const result = await deleteTask(taskId);
       if (result) {
@@ -45,7 +46,7 @@ function App() {
     }
   };
 
-  async function handleToggleTask(task){
+  async function handleToggleTask(task: Task): Promise<void>{
     try {
       const updatedTask = { ...task, done: !task.done };
       const result = await updateTask(updatedTask);
@@ -57,7 +58,7 @@ function App() {
     }
   };
 
-  async function handleEditTask(task){
+  async function handleEditTask(task: Task): Promise<void>{
     try {
       const result = await updateTask(task);
       if (result) {
@@ -70,8 +71,9 @@ function App() {
 
   return (
     <div className="main-container">
+      <TopBar />
       <div className="title-container">
-        <img className="todo-img" src={todoListImg} alt="Lista de tarefas" />
+        <img className="todo-img" src="/assets/todo-list.png" alt="Lista de tarefas" />
         <h1 className="title">Lista de tarefas show de bola</h1>
       </div>     
 
