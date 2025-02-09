@@ -74,7 +74,7 @@ function App() {
       <TopBar />
       <div className="title-container">
         <img className="todo-img" src="/assets/todo-list.png" alt="Lista de tarefas" />
-        <h1 className="title">Lista de tarefas show de bola</h1>
+        <h1 className="title">Lista de Tarefas Show de Bola</h1>
       </div>     
 
       <Form onAddTask={handleAddTask} />

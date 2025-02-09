@@ -11,5 +11,11 @@
 }
 
 .logo-top {
-  width: 250px;
+  width: 18rem;
+}
+
+@media screen and (max-width: 500px) {
+  .logo-top {
+    width: 14rem;
+  }
 }
