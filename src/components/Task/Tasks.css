@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 10px;
-  background: rgb(173, 172, 172);
+  background: var(--main-gray);
   margin-bottom: 14px;
   box-shadow: 6px 4px 6px 2px rgba(0, 0, 0, 0.45);
   transition: all ease 0.25s;
@@ -32,7 +32,7 @@
 
 .i-button {
   padding: 6px !important;
-  background: rgb(128, 128, 128) !important;
+  background: var(--secondary-gray) !important;
   border-radius: 5px !important;
   margin-left: 10px !important;
   font-size: 1.2rem !important;
@@ -47,7 +47,7 @@
 }
 
 .custom-tooltip .MuiTooltip-tooltip {
-  background-color: #1976d2 !important;
+  background-color: var(--main-blue) !important;
   color: white !important;
   font-size: 12px !important;
   padding: 8px 12px;

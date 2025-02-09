@@ -12,7 +12,7 @@ const ProgressBar = (props) => {
     <div className="progress-bar-container">
       <span className="label">Progresso das tarefas ({getProgress()}%)</span>
       <div className="progress-bar-border">
-        <div className="progress-bar" style={{ width: `${getProgress()}%` }}></div>
+        <div className={`progress-bar ${getProgress() < 100 && 'flat-border'}`} style={{ width: `${getProgress()}%` }}></div>
       </div>
     </div>
   );

@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap");
 
+:root {
+  --main-gray: rgb(173, 172, 172);
+  --secondary-gray: rgb(128, 128, 128);
+  --main-blue: #1976d2;
+}
+
 body {
   overflow-x: hidden;
   background: rgb(72, 69, 69);

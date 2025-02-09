@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgb(196, 195, 195);
+  background: var(--main-gray);
   border-radius: 10px;
   box-shadow: 6px 4px 6px 2px rgba(0, 0, 0, 0.45);
 }
