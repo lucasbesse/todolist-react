@@ -52,7 +52,7 @@ export const updateTask = async (task: Task): Promise<Task> => {
       headers: { "Content-Type": "application/json" },
     });
 
-    if (!response.ok) throw new Error("Erro ao excluir tarefa");
+    if (!response.ok) throw new Error("Erro ao editar tarefa");
     return await response.json();
   } catch (error) {
     console.error(error);
