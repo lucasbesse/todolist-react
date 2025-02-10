@@ -35,7 +35,6 @@ input {
   font-size: 1.4rem;
   color: white;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  margin-top: 1.5rem;
   text-align: center;
 }
 
@@ -45,7 +44,6 @@ input {
   width: 30vw;
   justify-content: center;
   margin-bottom: 2.5rem;
-  flex-direction: column;
 }
 
 .title-container .f-icon {
@@ -55,8 +53,8 @@ input {
 }
 
 .todo-img {
-  width: 4rem;
-  margin-right: 0.8rem;
+  width: 3rem;
+  margin-right: 1rem;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
 }
 

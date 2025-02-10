@@ -107,23 +107,8 @@
   padding-top: 20px !important;
 }
 
-.task-enter {
-  animation: fadeInDown 0.5s ease-out;
-}
-
 @media screen and (max-width: 1200px) {
   .t-container {
     width: 80vw;
-  }
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
