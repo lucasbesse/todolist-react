@@ -19,7 +19,7 @@ function Tasks(props: TasksProps) {
   const [editMode, setEditMode] = useState(false);
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [editedTaskName, setEditedTaskName] = useState("");
-  const [sortBy, setSortBy] = useState("date");
+  const [sortBy, setSortBy] = useState("-id");
 
   const handleSaveEdit = (task: Task): void => {
     setEditMode(false);
@@ -49,8 +49,8 @@ function Tasks(props: TasksProps) {
           <FormControl component="fieldset">
             <FormLabel className="field-label" component="legend">Ordenar por</FormLabel>
             <RadioGroup row value={sortBy} onChange={handleSortChange}>
-              <FormControlLabel value="date" control={<Radio color="primary" />} label="Data" />
-              <FormControlLabel value="status" control={<Radio color="primary" />} label="Status" />
+              <FormControlLabel value="-id" control={<Radio color="primary" />} label="Data" />
+              <FormControlLabel value="done" control={<Radio color="primary" />} label="Status" />
               <FormControlLabel value="name" control={<Radio color="primary" />} label="Nome" />
             </RadioGroup>
           </FormControl>

@@ -1,8 +1,16 @@
+import { Task } from "../Task/Task.interface";
 import "./ProgressBar.css";
 
-const ProgressBar = (props) => {
+interface ProgressBarProps {
+  tasks: Task[];
+}
+
+function ProgressBar(props: ProgressBarProps){
 
   const getProgress = (): number => {
+    if(props.tasks.length === 0){
+      return 0
+    }
     const completedTasks = props.tasks.filter(task => task.done).length;
     let result = ((completedTasks / props.tasks.length) * 100).toFixed(0);
     return parseInt(result);

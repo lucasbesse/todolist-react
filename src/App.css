@@ -27,7 +27,7 @@ input {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 7rem;
+  padding-top: 6rem;
   padding-bottom: 1rem;
 }
 
@@ -35,7 +35,6 @@ input {
   font-size: 1.4rem;
   color: white;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  text-align: center;
 }
 
 .title-container {
@@ -43,7 +42,7 @@ input {
   align-items: center;
   width: 30vw;
   justify-content: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .title-container .f-icon {
@@ -63,12 +62,12 @@ input {
 }
 
 ::-webkit-scrollbar-track {
-  background: #494949;
+  background: var(--main-gray);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #191b2d;
+  background: var(--main-blue);
   border-radius: 10px;
 }
 

@@ -3,7 +3,7 @@ const API_URL = `${process.env.REACT_APP_API_URL}/tasks/`;
 
 export const getTasks = async (sort?: string): Promise<Task[]> => {
   const url = new URL(API_URL);
-  url.searchParams.append("order", sort || "date");
+  url.searchParams.append("ordering", sort || "-id");
   try {
     const response = await fetch(url.toString());
     if (!response.ok) throw new Error("Erro ao buscar tarefas");
@@ -44,7 +44,7 @@ export const deleteTask = async (taskId: number): Promise<any> => {
   }
 };
 
-export const updateTask = async (task: Task): Promise<any> => {
+export const updateTask = async (task: Task): Promise<Task> => {
   try {
     const response = await fetch(`${API_URL}${task.id}/`, {
       method: "PUT",
@@ -53,7 +53,7 @@ export const updateTask = async (task: Task): Promise<any> => {
     });
 
     if (!response.ok) throw new Error("Erro ao excluir tarefa");
-    return true;
+    return await response.json();
   } catch (error) {
     console.error(error);
     return null;

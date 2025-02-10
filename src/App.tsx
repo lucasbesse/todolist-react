@@ -29,8 +29,8 @@ function App() {
       const newTask = { name: task.name, done: task.done };
       const data = await addTask(newTask);
       if (data) {
-        setTasks(prevTasks => [data, ...prevTasks ]);
         setlastAddedId(data.id)
+        setTasks(prevTasks => [data, ...prevTasks ]);
       }
     } catch (error) {
       console.error("Erro ao adicionar tarefa:", error);
@@ -90,7 +90,7 @@ function App() {
         lastAddedId={lastAddedId}
       />
 
-      {tasks.length > 0 && <ProgressBar tasks={tasks} />}
+      <ProgressBar tasks={tasks} />
     </div>
   );
 }
