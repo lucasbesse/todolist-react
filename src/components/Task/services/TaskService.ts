@@ -1,9 +1,11 @@
 import { Task } from "../Task.interface";
 const API_URL = `${process.env.REACT_APP_API_URL}/tasks/`;
 
-export const getTasks = async (): Promise<Task[]> => {
+export const getTasks = async (sort?: string): Promise<Task[]> => {
+  const url = new URL(API_URL);
+  url.searchParams.append("order", sort || "date");
   try {
-    const response = await fetch(API_URL);
+    const response = await fetch(url.toString());
     if (!response.ok) throw new Error("Erro ao buscar tarefas");
     return await response.json();
   } catch (error) {
@@ -12,7 +14,7 @@ export const getTasks = async (): Promise<Task[]> => {
   }
 };
 
-export const addTask = async (task: Task): Promise<any> => {
+export const addTask = async (task: Task): Promise<Task> => {
   try {
     const response = await fetch(API_URL, {
       method: "POST",

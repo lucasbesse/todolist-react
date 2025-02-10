@@ -9,14 +9,15 @@ import TopBar from "./components/TopBar/TopBar";
 
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [lastAddedId, setlastAddedId] = useState(null);
 
   useEffect(() => { 
     fetchTasks();
   }, []);
 
-  async function fetchTasks(): Promise<void>{
+  async function fetchTasks(sort?: string): Promise<void>{
     try {
-      const data = await getTasks();
+      const data = await getTasks(sort);
       setTasks(data);
     } catch (error) {
       console.error("Erro ao buscar tarefas:", error);
@@ -29,6 +30,7 @@ function App() {
       const data = await addTask(newTask);
       if (data) {
         setTasks(prevTasks => [data, ...prevTasks ]);
+        setlastAddedId(data.id)
       }
     } catch (error) {
       console.error("Erro ao adicionar tarefa:", error);
@@ -84,6 +86,8 @@ function App() {
         onDeleteTask={handleDeleteTask} 
         onToggleTask={handleToggleTask} 
         onEditTask={handleEditTask} 
+        onChangeSort={fetchTasks}
+        lastAddedId={lastAddedId}
       />
 
       {tasks.length > 0 && <ProgressBar tasks={tasks} />}

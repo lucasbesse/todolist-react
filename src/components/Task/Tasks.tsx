@@ -1,6 +1,6 @@
 import { faBarsProgress, faCheck, faPencil, faRotateLeft, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Checkbox, FormControlLabel, IconButton, Tooltip } from "@mui/material";
+import { FormControl, FormControlLabel, FormLabel, IconButton, Radio, RadioGroup, Tooltip } from "@mui/material";
 import { useState } from "react";
 import { Task } from "./Task.interface";
 
@@ -11,14 +11,15 @@ interface TasksProps {
   onToggleTask: (task: Task) => void;
   onEditTask: (task: Task) => void;
   onDeleteTask: (taskId: number) => void;
+  onChangeSort: (sort: string) => void;
+  lastAddedId: number;
 }
 
 function Tasks(props: TasksProps) {
-  const [showCompleted, setShowCompleted] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [editedTaskName, setEditedTaskName] = useState("");
-  const filteredTasks: Task[] = showCompleted ? props.tasks.filter((task) => !task.done) : props.tasks;
+  const [sortBy, setSortBy] = useState("date");
 
   const handleSaveEdit = (task: Task): void => {
     setEditMode(false);
@@ -35,29 +36,30 @@ function Tasks(props: TasksProps) {
     setEditedTaskName(task.name)
     setEditingTaskId(task.id)
   }
+
+  const handleSortChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    props.onChangeSort(event.target.value)
+    setSortBy(event.target.value)
+  }
   
   return (
     <div className="t-container">
       {props.tasks.length > 0 && 
         <div className="check-container">
-        <FormControlLabel
-          control={
-            <Checkbox
-              className="custom-checkbox" 
-              checked={showCompleted}
-              onChange={() => setShowCompleted(!showCompleted)}
-              color="primary"
-            />
-          }
-          label="Mostrar apenas ativas"
-          className="filter-checkbox"
-        />
+          <FormControl component="fieldset">
+            <FormLabel className="field-label" component="legend">Ordenar por</FormLabel>
+            <RadioGroup row value={sortBy} onChange={handleSortChange}>
+              <FormControlLabel value="date" control={<Radio color="primary" />} label="Data" />
+              <FormControlLabel value="status" control={<Radio color="primary" />} label="Status" />
+              <FormControlLabel value="name" control={<Radio color="primary" />} label="Nome" />
+            </RadioGroup>
+          </FormControl>
         </div>
       }
-      {filteredTasks.length === 0 && <span className="empty-list">Nenhuma tarefa adicionada.</span>}
+      {props.tasks.length === 0 && <span className="empty-list">Nenhuma tarefa adicionada.</span>}
       <div className="scroll-container">
-        {filteredTasks.map((task) => (
-          <div className={`task ${(task.done ? 'done' : 'not-done')}`} key={task.id}>
+        {props.tasks.map((task) => (
+          <div className={`task ${(task.done ? 'done' : 'not-done')} ${task.id === props.lastAddedId && 'task-enter'}`} key={task.id}>
             <FontAwesomeIcon className="f-icon" icon={faBarsProgress} />
             {editMode && (editingTaskId === task.id) ? (
               <input
