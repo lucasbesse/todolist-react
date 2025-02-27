@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import FloatButton from "../FloatButton/FloatButton";
 import Form from "../Form/Form";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import { addTask, deleteTask, getTasks, updateTask } from "../Task/services/TaskService";
@@ -9,6 +11,9 @@ import "./Home.css";
 function Home() {
   const [tasks, setTasks] = useState([]);
   const [lastAddedId, setlastAddedId] = useState(null);
+  const [texto, setTexto] = useState("Lista de Tarefas Show de Bola");
+  const navigate = useNavigate();
+  const [active, setActive] = useState<boolean>(false)
 
   useEffect(() => { 
     fetchTasks();
@@ -70,11 +75,19 @@ function Home() {
     }
   };
 
+  function toggleActive(): void{
+    setActive((prev)=>{
+      const active = !prev
+      setTexto(active ? "Whatsapp" : "Lista de Tarefas Show de Bola")
+      return active
+    })
+  }
+
   return (
     <div className="main-container">
       <div className="title-container">
         <img className="todo-img" src="/assets/todo-list.png" alt="Lista de tarefas" />
-        <h1 className="title">Lista de Tarefas Show de Bola</h1>
+        <h1 className="title">{texto}</h1>
       </div>     
 
       <Form onAddTask={handleAddTask} />
@@ -89,6 +102,7 @@ function Home() {
       />
 
       <ProgressBar tasks={tasks} />
+      <FloatButton toggleActive={toggleActive} active={active}></FloatButton>
     </div>
   );
 }

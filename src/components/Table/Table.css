@@ -1,0 +1,12 @@
+.table {
+  margin-top: 6rem;
+  width: 100%;
+  background: rgb(188, 188, 255);
+}
+th {
+  text-align: start;
+  padding: 8px;
+}
+td {
+  padding: 6px;
+}

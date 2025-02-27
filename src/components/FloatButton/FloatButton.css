@@ -1,0 +1,9 @@
+.float-btn {
+  position: fixed !important;
+  left: 20px !important;
+  bottom: 30px !important;
+  margin: 20px !important;
+}
+.inactive {
+  background: red !important;
+}
