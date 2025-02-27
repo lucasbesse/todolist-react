@@ -2,16 +2,15 @@ import { faBarsProgress, faCheck, faPencil, faRotateLeft, faTrash } from "@forta
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormControl, FormControlLabel, FormLabel, IconButton, Radio, RadioGroup, Tooltip } from "@mui/material";
 import { useState } from "react";
+import { deleteTask, updateTask } from "../Task/services/TaskService";
 import { Task } from "./Task.interface";
 
 import "./Tasks.css";
 
 interface TasksProps {
   tasks: Task[];
-  onToggleTask: (task: Task) => void;
-  onEditTask: (task: Task) => void;
-  onDeleteTask: (taskId: number) => void;
   onChangeSort: (sort: string) => void;
+  updateState: (tasks: Task[]) => void;
   lastAddedId: number;
 }
 
@@ -28,7 +27,7 @@ function Tasks(props: TasksProps) {
     }
     task.name = editedTaskName
     setEditedTaskName('')
-    props.onEditTask(task);
+    handleEditTask(task);
   }
 
   const handleEditMode = (task: Task): void => {
@@ -41,6 +40,43 @@ function Tasks(props: TasksProps) {
     props.onChangeSort(event.target.value)
     setSortBy(event.target.value)
   }
+
+  async function handleDeleteTask(taskId: number): Promise<void>{
+    try {
+      const result = await deleteTask(taskId);
+      if (result) {
+        const newTasks = props.tasks.filter(task => task.id !== taskId)
+        props.updateState(newTasks);
+      }
+    } catch (error) {
+      console.error("Erro ao deletar tarefa:", error);
+    }
+  };
+
+  async function handleToggleTask(task: Task): Promise<void>{
+    try {
+      const updatedTask = { ...task, done: !task.done };
+      const result = await updateTask(updatedTask);
+      if (result) {
+        const newTasks = props.tasks.map(t => (t.id === task.id ? updatedTask : t))
+        props.updateState(newTasks);
+      }
+    } catch (error) {
+      console.error("Erro ao concluir tarefa:", error);
+    }
+  };
+
+  async function handleEditTask(task: Task): Promise<void>{
+    try {
+      const result = await updateTask(task);
+      if (result) {
+        const newTasks = props.tasks.map(t => (t.id === task.id ? task : t))
+        props.updateState(newTasks);
+      }
+    } catch (error) {
+      console.error("Erro ao editar tarefa:", error);
+    }
+  };
   
   return (
     <div className="t-container">
@@ -77,7 +113,7 @@ function Tasks(props: TasksProps) {
             {(!editMode || task.id !== editingTaskId) &&
               <div className="buttons">
               <Tooltip className="custom-tooltip" classes={{ popper: "custom-tooltip finish" }} title={task.done ? "Retomar" : "Finalizar"}>
-                <IconButton onClick={()=> props.onToggleTask(task)} className="i-button check-btn">
+                <IconButton onClick={()=> handleToggleTask(task)} className="i-button check-btn">
                 <FontAwesomeIcon icon={task.done ? faRotateLeft : faCheck} />
                 </IconButton>
               </Tooltip>
@@ -89,7 +125,7 @@ function Tasks(props: TasksProps) {
               </Tooltip>
 
               <Tooltip classes={{ popper: "custom-tooltip delete" }} title="Excluir">
-                <IconButton onClick={() => props.onDeleteTask(task.id)} className="i-button">
+                <IconButton onClick={() => handleDeleteTask(task.id)} className="i-button">
                   <FontAwesomeIcon icon={faTrash} />
                 </IconButton>
               </Tooltip>
